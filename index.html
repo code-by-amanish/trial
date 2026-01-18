@@ -1,1082 +1,478 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Size Reducer | PAN Aadhaar Voter Photo Resizer Online Free</title>
-  <meta name="description" content="100% Secure Image Size Reducer - No data upload. Resize photos for PAN Card, Aadhaar, Voter ID, Passport instantly to 20KB-300KB. Local processing, PDF export. Free online tool.">
-  <meta name="keywords" content="image size reducer, photo resizer, PAN card photo size, Aadhaar photo resize, voter ID photo compressor, signature resize, image compressor online free, secure image compressor">
-  
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
-  
-  <style>
-    :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --secondary: #8b5cf6;
-      --light: #f8fafc;
-      --dark: #1e293b;
-      --gray: #64748b;
-      --success: #10b981;
-      --error: #ef4444;
-      --border: #e2e8f0;
-      --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      --radius: 16px;
-    }
-    
-    [data-theme="dark"] {
-      --light: #0f172a;
-      --dark: #f1f5f9;
-      --gray: #94a3b8;
-      --border: #334155;
-      --shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-    }
-    
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: var(--light);
-      color: var(--dark);
-      min-height: 100vh;
-      padding: 20px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: background 0.3s, color 0.3s;
-      overflow-x: hidden;
-    }
-    
-    .container {
-      width: 100%;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    
-    /* Header */
-    header {
-      text-align: center;
-      margin-bottom: 30px;
-    }
-    
-    .logo {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      margin-bottom: 10px;
-    }
-    
-    .logo-icon {
-      width: 40px;
-      height: 40px;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 20px;
-    }
-    
-    h1 {
-      font-size: 2rem;
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 5px;
-    }
-    
-    .tagline {
-      color: var(--gray);
-      font-size: 1rem;
-      margin-bottom: 15px;
-    }
-    
-    /* Theme Toggle */
-    .theme-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      background: var(--light);
-      border: 2px solid var(--border);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      color: var(--dark);
-      transition: all 0.3s;
-      z-index: 1000;
-    }
-    
-    .theme-toggle:hover {
-      transform: rotate(30deg);
-    }
-    
-    /* Main Content */
-    .app-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
-      margin-bottom: 30px;
-    }
-    
-    @media (max-width: 768px) {
-      .app-wrapper {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-    }
-    
-    /* Upload Section */
-    .upload-section {
-      background: var(--light);
-      border-radius: var(--radius);
-      padding: 25px;
-      box-shadow: var(--shadow);
-      border: 2px solid var(--border);
-      height: fit-content;
-    }
-    
-    .upload-area {
-      border: 3px dashed var(--border);
-      border-radius: 12px;
-      padding: 30px 20px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s;
-      margin-bottom: 20px;
-    }
-    
-    .upload-area:hover {
-      border-color: var(--primary);
-      background: rgba(99, 102, 241, 0.05);
-    }
-    
-    .upload-icon {
-      font-size: 2.5rem;
-      margin-bottom: 15px;
-      color: var(--primary);
-    }
-    
-    .upload-text h3 {
-      margin-bottom: 10px;
-      color: var(--dark);
-      font-size: 1.2rem;
-    }
-    
-    .upload-text p {
-      color: var(--gray);
-      font-size: 0.9rem;
-    }
-    
-    .file-input {
-      display: none;
-    }
-    
-    /* Controls Section */
-    .controls-section {
-      background: var(--light);
-      border-radius: var(--radius);
-      padding: 25px;
-      box-shadow: var(--shadow);
-      border: 2px solid var(--border);
-      height: fit-content;
-    }
-    
-    .control-group {
-      margin-bottom: 20px;
-    }
-    
-    .control-label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: var(--dark);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.95rem;
-    }
-    
-    .control-label i {
-      color: var(--primary);
-    }
-    
-    select, input {
-      width: 100%;
-      padding: 12px 16px;
-      border-radius: 10px;
-      border: 2px solid var(--border);
-      background: var(--light);
-      color: var(--dark);
-      font-family: 'Poppins', sans-serif;
-      font-size: 0.9rem;
-      transition: all 0.3s;
-    }
-    
-    select:focus, input:focus {
-      outline: none;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.2);
-    }
-    
-    .size-options {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 8px;
-    }
-    
-    .size-option {
-      padding: 12px;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      text-align: center;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-    
-    .size-option:hover {
-      border-color: var(--primary);
-      transform: translateY(-2px);
-    }
-    
-    .size-option.active {
-      background: var(--primary);
-      color: white;
-      border-color: var(--primary);
-      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
-    }
-    
-    .size-kb {
-      font-weight: 700;
-      font-size: 1rem;
-    }
-    
-    .size-desc {
-      font-size: 0.75rem;
-      opacity: 0.9;
-      margin-top: 4px;
-    }
-    
-    /* Crop Container */
-    .crop-container {
-      display: none;
-      margin-top: 20px;
-    }
-    
-    .crop-wrapper {
-      width: 100%;
-      max-height: 250px;
-      overflow: hidden;
-      border-radius: 12px;
-      margin-bottom: 15px;
-    }
-    
-    .crop-controls {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 15px;
-    }
-    
-    /* Buttons */
-    .btn {
-      padding: 14px 20px;
-      border-radius: 12px;
-      border: none;
-      font-family: 'Poppins', sans-serif;
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      transition: all 0.3s;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      width: 100%;
-    }
-    
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), var(--secondary));
-      color: white;
-    }
-    
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
-    }
-    
-    .btn-secondary {
-      background: var(--light);
-      color: var(--dark);
-      border: 2px solid var(--border);
-    }
-    
-    .btn-secondary:hover {
-      border-color: var(--primary);
-    }
-    
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-      transform: none !important;
-      box-shadow: none !important;
-    }
-    
-    /* Preview Section */
-    .preview-section {
-      text-align: center;
-      margin-top: 25px;
-    }
-    
-    .preview-container {
-      display: none;
-      background: var(--light);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: var(--shadow);
-      border: 2px solid var(--border);
-      margin-bottom: 20px;
-    }
-    
-    .preview-title {
-      text-align: left;
-      margin-bottom: 15px;
-      color: var(--dark);
-      font-size: 1.2rem;
-    }
-    
-    .image-preview {
-      max-width: 100%;
-      max-height: 200px;
-      border-radius: 10px;
-      margin-bottom: 15px;
-      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-      object-fit: contain;
-    }
-    
-    .file-info {
-      display: flex;
-      justify-content: space-between;
-      background: rgba(99, 102, 241, 0.1);
-      padding: 12px;
-      border-radius: 10px;
-      margin-top: 15px;
-      font-size: 0.85rem;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-    
-    .info-item {
-      text-align: center;
-      flex: 1;
-      min-width: 80px;
-    }
-    
-    .info-value {
-      font-weight: 700;
-      color: var(--primary);
-      font-size: 0.9rem;
-    }
-    
-    /* Security Info */
-    .security-info {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
-      border-radius: var(--radius);
-      padding: 20px;
-      margin-top: 25px;
-      border-left: 5px solid var(--success);
-    }
-    
-    .security-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-      color: var(--success);
-    }
-    
-    .security-text {
-      color: var(--gray);
-      line-height: 1.6;
-      font-size: 0.9rem;
-    }
-    
-    .highlight {
-      color: var(--primary);
-      font-weight: 600;
-    }
-    
-    /* Footer */
-    footer {
-      text-align: center;
-      margin-top: 30px;
-      color: var(--gray);
-      font-size: 0.85rem;
-      padding-top: 15px;
-      border-top: 1px solid var(--border);
-    }
-    
-    /* Loading Spinner */
-    .spinner {
-      display: none;
-      width: 40px;
-      height: 40px;
-      border: 4px solid var(--border);
-      border-top: 4px solid var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
-      margin: 10px auto;
-    }
-    
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
-    }
-    
-    /* Mobile Optimizations */
-    @media (max-width: 480px) {
-      body {
-        padding: 15px;
-      }
-      
-      h1 {
-        font-size: 1.6rem;
-      }
-      
-      .upload-section, .controls-section {
-        padding: 20px;
-      }
-      
-      .size-options {
-        grid-template-columns: 1fr;
-      }
-      
-      .btn {
-        padding: 12px 16px;
-        font-size: 0.9rem;
-      }
-      
-      .theme-toggle {
-        top: 15px;
-        right: 15px;
-        width: 45px;
-        height: 45px;
-      }
-    }
-    
-    /* Fix for mobile viewport */
-    @media (max-width: 768px) {
-      body {
-        align-items: flex-start;
-        padding-top: 70px;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Incredible India - States Information</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        :root {
+            --saffron: #FF9933;
+            --white: #FFFFFF;
+            --green: #138808;
+            --blue: #000080;
+            --light-blue: #E6F2FF;
+            --gray: #F5F5F5;
+            --dark-gray: #333;
+        }
+        
+        body {
+            background-color: #f9f9f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(to right, var(--saffron), var(--white), var(--green));
+            color: var(--blue);
+            padding: 2rem 1rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            font-style: italic;
+            color: var(--blue);
+            margin-bottom: 1rem;
+        }
+        
+        .ashoka-chakra {
+            font-size: 3rem;
+            color: var(--blue);
+            margin: 1rem 0;
+        }
+        
+        nav {
+            background-color: var(--blue);
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.7rem 1.5rem;
+            margin: 0 0.3rem;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        nav a:hover {
+            background-color: rgba(255,255,255,0.2);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .intro {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            margin-bottom: 3rem;
+            border-left: 5px solid var(--saffron);
+        }
+        
+        .intro h2 {
+            color: var(--blue);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .intro h2 i {
+            color: var(--saffron);
+        }
+        
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2.5rem 0;
+        }
+        
+        .stat-card {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .stat-card i {
+            font-size: 2.5rem;
+            color: var(--blue);
+            margin-bottom: 1rem;
+        }
+        
+        .stat-card h3 {
+            color: var(--green);
+            margin-bottom: 0.5rem;
+        }
+        
+        .states-section {
+            margin-top: 3rem;
+        }
+        
+        .section-title {
+            text-align: center;
+            color: var(--blue);
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--saffron);
+        }
+        
+        .states-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .state-card {
+            background-color: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            height: 220px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+        }
+        
+        .state-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.12);
+        }
+        
+        .state-placeholder {
+            height: 70%;
+            background-color: var(--light-blue);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+        }
+        
+        .placeholder-content {
+            text-align: center;
+            color: var(--blue);
+            font-weight: 500;
+        }
+        
+        .placeholder-content i {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            color: var(--saffron);
+            display: block;
+        }
+        
+        .state-info {
+            padding: 1.2rem;
+            height: 30%;
+            background-color: var(--gray);
+        }
+        
+        .state-info p {
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        footer {
+            background-color: var(--blue);
+            color: white;
+            text-align: center;
+            padding: 2rem 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .footer-logo {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--saffron);
+        }
+        
+        .copyright {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.2);
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            .states-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                gap: 1.5rem;
+            }
+            
+            nav a {
+                padding: 0.5rem 1rem;
+                margin: 0.2rem;
+                font-size: 0.9rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+            
+            .states-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stat-card {
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
-<body data-theme="light">
-  <button class="theme-toggle" id="themeToggle">🌙</button>
-  
-  <div class="container">
+<body>
     <header>
-      <div class="logo">
-        <div class="logo-icon">📷</div>
-        <div>
-          <h1>Image Size Reducer</h1>
-          <p class="tagline">Secure • Fast • No Upload Required</p>
+        <div class="header-content">
+            <h1>Incredible India</h1>
+            <div class="ashoka-chakra">☸</div>
+            <p class="tagline">Unity in Diversity</p>
+            <p>Explore the rich cultural heritage, diversity, and beauty of India and its states</p>
         </div>
-      </div>
     </header>
     
-    <div class="app-wrapper">
-      <!-- Upload Section -->
-      <section class="upload-section">
-        <div class="upload-area" id="uploadArea">
-          <div class="upload-icon">📁</div>
-          <div class="upload-text">
-            <h3>Drop your image here</h3>
-            <p>or click to browse (JPEG, PNG, JPG)</p>
-            <p><small>Max size: 10MB</small></p>
-          </div>
-          <input type="file" id="imageInput" class="file-input" accept="image/*">
+    <nav>
+        <div class="nav-container">
+            <a href="#about"><i class="fas fa-info-circle"></i> About India</a>
+            <a href="#states"><i class="fas fa-map-marked-alt"></i> States</a>
+            <a href="#culture"><i class="fas fa-monument"></i> Culture</a>
+            <a href="#geography"><i class="fas fa-mountain"></i> Geography</a>
+            <a href="#tourism"><i class="fas fa-umbrella-beach"></i> Tourism</a>
         </div>
-        
-        <div class="crop-container" id="cropContainer">
-          <div class="crop-wrapper">
-            <img id="cropImage">
-          </div>
-          <div class="crop-controls">
-            <select id="ratioSelect" class="btn-secondary" style="padding: 12px;">
-              <option value="free">Free Crop</option>
-              <option value="1">Square (1:1)</option>
-              <option value="3/4">Document (3:4)</option>
-              <option value="4/3">Widescreen (4:3)</option>
-              <option value="16/9">Widescreen (16:9)</option>
-            </select>
-            <button id="cropBtn" class="btn btn-secondary">✂️ Crop Image</button>
-          </div>
-        </div>
-      </section>
-      
-      <!-- Controls Section -->
-      <section class="controls-section">
-        <div class="control-group">
-          <label class="control-label"><i>📏</i> Target Size</label>
-          <div class="size-options">
-            <!-- ✅ 20 KB ADDED HERE -->
-            <div class="size-option active" data-size="20">
-              <div class="size-kb">20 KB</div>
-              <div class="size-desc">Aadhaar Small</div>
-            </div>
-            <div class="size-option" data-size="25">
-              <div class="size-kb">25 KB</div>
-              <div class="size-desc">PAN Card</div>
-            </div>
-            <div class="size-option" data-size="50">
-              <div class="size-kb">50 KB</div>
-              <div class="size-desc">Aadhaar Card</div>
-            </div>
-            <div class="size-option" data-size="100">
-              <div class="size-kb">100 KB</div>
-              <div class="size-desc">Passport</div>
-            </div>
-            <div class="size-option" data-size="300">
-              <div class="size-kb">300 KB</div>
-              <div class="size-desc">Voter ID</div>
-            </div>
-            <div class="size-option" data-size="original">
-              <div class="size-kb">Original</div>
-              <div class="size-desc">Keep size</div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="control-group">
-          <label class="control-label"><i>🖼️</i> Output Format</label>
-          <!-- ✅ ONLY JPEG FORMAT -->
-          <select id="formatSelect">
-            <option value="jpg" selected>JPEG (Recommended)</option>
-          </select>
-          <small style="color: var(--gray); display: block; margin-top: 5px;">Only JPEG format for best compatibility</small>
-        </div>
-        
-        <div class="control-group">
-          <label class="control-label"><i>📝</i> File Name</label>
-          <input type="text" id="fileNameInput" placeholder="my-resized-image" value="resized-image">
-          <small style="color: var(--gray); display: block; margin-top: 5px;">File will be saved as .jpg</small>
-        </div>
-        
-        <div class="control-group">
-          <label class="control-label"><i>⚙️</i> Image Quality</label>
-          <select id="qualitySelect">
-            <option value="1">High (Best Quality)</option>
-            <option value="0.9" selected>Very Good</option>
-            <option value="0.8">Good (Recommended)</option>
-            <option value="0.7">Medium</option>
-            <option value="0.6">Low</option>
-          </select>
-        </div>
-        
-        <button id="processBtn" class="btn btn-primary" disabled>🔄 Process & Resize</button>
-        <button id="downloadBtn" class="btn btn-primary" style="margin-top: 10px; background: var(--success);" disabled>⬇️ Download JPEG</button>
-        
-        <div class="spinner" id="loadingSpinner"></div>
-      </section>
-    </div>
+    </nav>
     
-    <!-- Preview Section -->
-    <section class="preview-section">
-      <div class="preview-container" id="previewContainer">
-        <h3 class="preview-title">Resized Image Preview</h3>
-        <img id="croppedPreview" class="image-preview">
-        <div class="file-info" id="fileInfo">
-          <div class="info-item">
-            <div>Format</div>
-            <div class="info-value" id="infoFormat">JPEG</div>
-          </div>
-          <div class="info-item">
-            <div>Size</div>
-            <div class="info-value" id="infoSize">-</div>
-          </div>
-          <div class="info-item">
-            <div>Dimensions</div>
-            <div class="info-value" id="infoDimensions">-</div>
-          </div>
-        </div>
-      </div>
-    </section>
-    
-    <!-- Security Info -->
-    <div class="security-info">
-      <div class="security-header">
-        <span>🔒</span>
-        <h3>100% Secure Processing</h3>
-      </div>
-      <p class="security-text">
-        Your images are processed locally in your browser. <span class="highlight">No data is uploaded to any server.</span> 
-        This tool is perfect for resizing sensitive documents like <span class="highlight">PAN Card, Aadhaar Card, Voter ID, Passport photos</span> 
-        while ensuring complete privacy and security. Works perfectly on <span class="highlight">mobile phones and desktop</span>.
-      </p>
+    <div class="container">
+        <section id="about" class="intro">
+            <h2><i class="fas fa-flag"></i> About India</h2>
+            <p>India, officially the Republic of India, is a country in South Asia. It is the seventh-largest country by area and the second-most populous country in the world. India is a federal union comprising 28 states and 8 union territories. The Indian subcontinent was home to the ancient Indus Valley Civilization and is the birthplace of four major world religions: Hinduism, Buddhism, Jainism, and Sikhism.</p>
+            <p>India became an independent nation in 1947 after a struggle for independence that was marked by non-violent resistance led by Mahatma Gandhi. The Constitution of India, adopted in 1950, established a secular and democratic republic.</p>
+            
+            <div class="stats">
+                <div class="stat-card">
+                    <i class="fas fa-landmark"></i>
+                    <h3>28 States</h3>
+                    <p>Each with unique culture & identity</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-language"></i>
+                    <h3>22 Official Languages</h3>
+                    <p>With hundreds of dialects</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <h3>1.4 Billion People</h3>
+                    <p>Second most populous country</p>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-map"></i>
+                    <h3>3.287 Million km²</h3>
+                    <p>Seventh largest country by area</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="states" class="states-section">
+            <h2 class="section-title">States of India</h2>
+            <p style="text-align: center; margin-bottom: 1.5rem; color: #555;">Each state has a designated area below for detailed information. Click on any state area to explore.</p>
+            
+            <div class="states-grid">
+                <!-- State 1 -->
+                <div class="state-card">
+                    <div class="state-placeholder">
+                        <div class="placeholder-content">
+                            <i class="fas fa-map-pin"></i>
+                            <p>Information about this state will appear here</p>
+                        </div>
+                    </div>
+                    <div class="state-info">
+                        <p>Details about culture, population, capital, and important facts will be displayed in this section.</p>
+                    </div>
+                </div>
+                
+                <!-- State 2 -->
+                <div class="state-card">
+                    <div class="state-placeholder">
+                        <div class="placeholder-content">
+                            <i class="fas fa-landmark"></i>
+                            <p>State details placeholder</p>
+                        </div>
+                    </div>
+                    <div class="state-info">
+                        <p>Famous landmarks, tourist attractions, and economic information will be shown here.</p>
+                    </div>
+                </div>
+                
+                <!-- State 3 -->
+                <div class="state-card">
+                    <div class="state-placeholder">
+                        <div class="placeholder-content">
+                            <i class="fas fa-utensils"></i>
+                            <p>Cuisine & traditions information</p>
+                        </div>
+                    </div>
+                    <div class="state-info">
+                        <p>Local cuisine, festivals, traditional clothing, and cultural practices of this state.</p>
+                    </div>
+                </div>
+                
+                <!-- State 4 -->
+                <div class="state-card">
+                    <div class="state-placeholder">
+                        <div class="placeholder-content">
+                            <i class="fas fa-industry"></i>
+                            <p>Economic & industrial data</p>
+                        </div>
+                    </div>
+                    <div class="state-info">
+                        <p>Key industries, agricultural products, economic contributions and development indicators.</p>
+                    </div>
+                </div>
+                
+                <!-- State 5 -->
+                <div class="state-card">
+                    <div class="state-placeholder">
+                        <div class="placeholder-content">
+                            <i class="fas fa-mountain"></i>
+                            <p>Geographical information</p>
+                        </div>
+                    </div>
+                    <div class="state-info">
+                        <p>Location, geography, climate, natural resources, and environmental features of the state.</p>
+                    </div>
+                </div>
+                
+                <!-- State 6 -->
+                <div class="state-card">
+                    <div class="state-placeholder">
+                        <div class="placeholder-content">
+                            <i class="fas fa-university"></i>
+                            <p>Historical significance</p>
+                        </div>
+                    </div>
+                    <div class="state-info">
+                        <p>Historical events, important figures, archaeological sites, and heritage locations.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p style="text-align: center; margin-top: 2.5rem; color: #666; font-style: italic;">Each of India's 28 states has a unique identity, culture, and contribution to the nation. These placeholders represent spaces where detailed information about each state can be added without explicitly naming them on this page.</p>
+        </section>
     </div>
     
     <footer>
-      <p>Image Size Reducer © 2023 | All processing happens locally in your browser</p>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <i class="fas fa-peace"></i>
+            </div>
+            <h3>Incredible India</h3>
+            <p>A land of diverse cultures, traditions, and heritage</p>
+            <div class="copyright">
+                <p>© 2023 India Information Portal. This website is for educational purposes.</p>
+                <p>All state placeholders are reserved for future content addition.</p>
+            </div>
+        </div>
     </footer>
-  </div>
-  
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  
-  <script>
-    // DOM Elements
-    const imageInput = document.getElementById("imageInput");
-    const uploadArea = document.getElementById("uploadArea");
-    const cropImage = document.getElementById("cropImage");
-    const cropContainer = document.getElementById("cropContainer");
-    const cropBtn = document.getElementById("cropBtn");
-    const ratioSelect = document.getElementById("ratioSelect");
-    const sizeOptions = document.querySelectorAll(".size-option");
-    const formatSelect = document.getElementById("formatSelect");
-    const fileNameInput = document.getElementById("fileNameInput");
-    const qualitySelect = document.getElementById("qualitySelect");
-    const processBtn = document.getElementById("processBtn");
-    const downloadBtn = document.getElementById("downloadBtn");
-    const croppedPreview = document.getElementById("croppedPreview");
-    const previewContainer = document.getElementById("previewContainer");
-    const themeToggle = document.getElementById("themeToggle");
-    const loadingSpinner = document.getElementById("loadingSpinner");
-    
-    // Info display elements
-    const infoFormat = document.getElementById("infoFormat");
-    const infoSize = document.getElementById("infoSize");
-    const infoDimensions = document.getElementById("infoDimensions");
-    
-    // State variables
-    let cropper = null;
-    let originalImageDataURL = null;
-    let processedImageDataURL = null;
-    let currentSize = "20"; // Default to 20KB
-    let fileName = "resized-image";
-    let isProcessing = false;
-    
-    // Initialize
-    document.addEventListener("DOMContentLoaded", () => {
-      setupEventListeners();
-      
-      // Set default file name
-      fileNameInput.addEventListener("input", (e) => {
-        fileName = e.target.value || "resized-image";
-      });
-      
-      // Set 20KB as default active
-      setActiveSizeOption("20");
-    });
-    
-    // Set active size option
-    function setActiveSizeOption(size) {
-      sizeOptions.forEach(option => {
-        option.classList.remove("active");
-        if (option.getAttribute("data-size") === size) {
-          option.classList.add("active");
-        }
-      });
-      currentSize = size;
-    }
-    
-    // Set up all event listeners
-    function setupEventListeners() {
-      // Upload area click
-      uploadArea.addEventListener("click", () => imageInput.click());
-      
-      // File input change
-      imageInput.addEventListener("change", handleImageUpload);
-      
-      // Drag and drop
-      uploadArea.addEventListener("dragover", (e) => {
-        e.preventDefault();
-        uploadArea.style.borderColor = "#6366f1";
-        uploadArea.style.backgroundColor = "rgba(99, 102, 241, 0.1)";
-      });
-      
-      uploadArea.addEventListener("dragleave", () => {
-        uploadArea.style.borderColor = "";
-        uploadArea.style.backgroundColor = "";
-      });
-      
-      uploadArea.addEventListener("drop", (e) => {
-        e.preventDefault();
-        uploadArea.style.borderColor = "";
-        uploadArea.style.backgroundColor = "";
-        
-        if (e.dataTransfer.files.length) {
-          imageInput.files = e.dataTransfer.files;
-          handleImageUpload();
-        }
-      });
-      
-      // Crop ratio change
-      ratioSelect.addEventListener("change", () => {
-        if (!cropper) return;
-        
-        if (ratioSelect.value === "free") {
-          cropper.setAspectRatio(NaN);
-        } else {
-          cropper.setAspectRatio(eval(ratioSelect.value));
-        }
-      });
-      
-      // Crop button
-      cropBtn.addEventListener("click", performCrop);
-      
-      // Size options
-      sizeOptions.forEach(option => {
-        option.addEventListener("click", () => {
-          const size = option.getAttribute("data-size");
-          setActiveSizeOption(size);
-          
-          // If we already have a processed image, update it
-          if (processedImageDataURL && !isProcessing) {
-            updateProcessedImage();
-          }
+
+    <script>
+        // Add interactivity to state cards
+        document.querySelectorAll('.state-card').forEach(card => {
+            card.addEventListener('click', function() {
+                // Visual feedback on click
+                this.style.boxShadow = '0 8px 25px rgba(0, 0, 128, 0.2)';
+                
+                // Reset other cards
+                document.querySelectorAll('.state-card').forEach(otherCard => {
+                    if (otherCard !== this) {
+                        otherCard.style.boxShadow = '0 5px 15px rgba(0,0,0,0.08)';
+                    }
+                });
+                
+                // Show a message (in a real site, this would load state-specific content)
+                const placeholder = this.querySelector('.placeholder-content p');
+                const originalText = placeholder.textContent;
+                placeholder.textContent = "State information will be loaded here...";
+                placeholder.style.color = "#138808";
+                placeholder.style.fontWeight = "bold";
+                
+                // Reset after a moment
+                setTimeout(() => {
+                    placeholder.textContent = originalText;
+                    placeholder.style.color = "";
+                    placeholder.style.fontWeight = "";
+                }, 1500);
+            });
         });
-      });
-      
-      // Quality select
-      qualitySelect.addEventListener("change", () => {
-        if (processedImageDataURL && !isProcessing) {
-          updateProcessedImage();
-        }
-      });
-      
-      // Process button
-      processBtn.addEventListener("click", processImage);
-      
-      // Download button
-      downloadBtn.addEventListener("click", downloadImage);
-      
-      // Theme toggle
-      themeToggle.addEventListener("click", toggleTheme);
-      
-      // Mobile touch improvements
-      document.addEventListener('touchstart', function() {}, {passive: true});
-      document.addEventListener('touchmove', function() {}, {passive: true});
-    }
-    
-    // Handle image upload
-    function handleImageUpload() {
-      const file = imageInput.files[0];
-      if (!file) return;
-      
-      // Check if file is an image
-      if (!file.type.match("image.*")) {
-        alert("Please select an image file (JPEG, PNG, JPG)");
-        return;
-      }
-      
-      // Check file size (max 10MB)
-      if (file.size > 10 * 1024 * 1024) {
-        alert("Image size should be less than 10MB");
-        return;
-      }
-      
-      const reader = new FileReader();
-      
-      reader.onload = (e) => {
-        // Set image source
-        cropImage.src = e.target.result;
-        originalImageDataURL = e.target.result;
         
-        // Show crop container
-        cropContainer.style.display = "block";
-        
-        // Destroy existing cropper
-        if (cropper) {
-          cropper.destroy();
-        }
-        
-        // Initialize cropper
-        setTimeout(() => {
-          cropper = new Cropper(cropImage, {
-            viewMode: 1,
-            autoCropArea: 0.8,
-            background: false,
-            responsive: true,
-            guides: true,
-            highlight: false,
-            movable: true,
-            rotatable: true,
-            scalable: true,
-            zoomable: true,
-            zoomOnTouch: true,
-            zoomOnWheel: true,
-            wheelZoomRatio: 0.1,
-            ready() {
-              // Enable process button
-              processBtn.disabled = false;
-              
-              // Auto-crop for mobile
-              if (window.innerWidth <= 768) {
-                cropper.setAspectRatio(3/4);
-                ratioSelect.value = "3/4";
-              }
-            }
-          });
-        }, 100);
-        
-        // Set default file name
-        fileName = file.name.replace(/\.[^/.]+$/, "") || "resized-image";
-        fileNameInput.value = fileName;
-        
-        // Reset preview
-        previewContainer.style.display = "none";
-        downloadBtn.disabled = true;
-        processedImageDataURL = null;
-      };
-      
-      reader.readAsDataURL(file);
-    }
-    
-    // Perform crop
-    function performCrop() {
-      if (!cropper) return;
-      
-      // Show loading
-      loadingSpinner.style.display = "block";
-      cropBtn.disabled = true;
-      
-      setTimeout(() => {
-        // Get cropped canvas
-        const canvas = cropper.getCroppedCanvas();
-        originalImageDataURL = canvas.toDataURL("image/jpeg", 1);
-        
-        // Show preview
-        croppedPreview.src = originalImageDataURL;
-        previewContainer.style.display = "block";
-        
-        // Update file info
-        updateFileInfo(originalImageDataURL, "jpg");
-        
-        // Process image automatically
-        processImage();
-        
-        // Hide loading
-        loadingSpinner.style.display = "none";
-        cropBtn.disabled = false;
-      }, 100);
-    }
-    
-    // Process image based on selected options
-    function processImage() {
-      if (!originalImageDataURL || isProcessing) return;
-      
-      isProcessing = true;
-      processBtn.disabled = true;
-      processBtn.textContent = "Processing...";
-      loadingSpinner.style.display = "block";
-      
-      const img = new Image();
-      
-      img.onload = () => {
-        const canvas = document.createElement("canvas");
-        const ctx = canvas.getContext("2d");
-        
-        // Set canvas dimensions
-        canvas.width = img.width;
-        canvas.height = img.height;
-        
-        // Draw image on canvas
-        ctx.drawImage(img, 0, 0);
-        
-        // Get quality value
-        const quality = parseFloat(qualitySelect.value);
-        
-        // First convert to JPEG with quality
-        let dataURL = canvas.toDataURL("image/jpeg", quality);
-        
-        // Resize if needed (not original)
-        if (currentSize !== "original") {
-          const targetKB = parseInt(currentSize);
-          if (targetKB > 0) {
-            dataURL = resizeImageToTargetSize(dataURL, targetKB, quality);
-          }
-        }
-        
-        // Update processed image
-        processedImageDataURL = dataURL;
-        croppedPreview.src = processedImageDataURL;
-        
-        // Update file info
-        updateFileInfo(processedImageDataURL, "jpg");
-        
-        // Enable download button
-        downloadBtn.disabled = false;
-        downloadBtn.textContent = `⬇️ Download (${currentSize === 'original' ? 'Original' : currentSize + 'KB'})`;
-        
-        // Reset processing state
-        isProcessing = false;
-        processBtn.disabled = false;
-        processBtn.textContent = "🔄 Process & Resize";
-        loadingSpinner.style.display = "none";
-        
-        // Scroll to preview on mobile
-        if (window.innerWidth <= 768) {
-          previewContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
-      };
-      
-      img.onerror = () => {
-        isProcessing = false;
-        processBtn.disabled = false;
-        processBtn.textContent = "🔄 Process & Resize";
-        loadingSpinner.style.display = "none";
-        alert("Error loading image. Please try again.");
-      };
-      
-      img.src = originalImageDataURL;
-    }
-    
-    // Update processed image when settings change
-    function updateProcessedImage() {
-      if (!originalImageDataURL || isProcessing) return;
-      processImage();
-    }
-    
-    // Resize image to target size in KB
-    function resizeImageToTargetSize(dataURL, targetKB, quality) {
-      const img = new Image();
-      
-      return new Promise((resolve) => {
-        img.onload = () => {
-          let canvas = document.createElement("canvas");
-          let ctx = canvas.getContext("2d");
-          
-          // Start with original dimensions
-          let width = img.width;
-          let height = img.height;
-          
-          let currentDataURL;
-          let currentSizeKB;
-          let attempts = 0;
-          const maxAttempts = 15;
-          
-          // Reduce size step by step
-          while (attempts < maxAttempts) {
-            canvas.width = width;
-            canvas.height = height;
-            ctx.drawImage(img, 0, 0, width, height);
-            
-            // Convert to JPEG
-            currentDataURL = canvas.toDataURL("image/jpeg", quality);
-            
-            // Calculate size in KB
-            currentSizeKB = Math.round((currentDataURL.length * 0.75) / 1024);
-            
-            // Check if we're at or below target size
-            if (currentSizeKB <= targetKB) {
-              resolve(currentDataURL);
-              return;
-            }
-            
-            // Reduce dimensions by 5-10% based on how far we are
-            const reduction = currentSizeKB > targetKB * 2 ? 0.85 : 0.92;
-            width = Math.floor(width * reduction);
-            height = Math.floor(height * reduction);
-            attempts++;
-          }
-          
-          // If we still haven't reached target size, return the smallest we got
-          resolve(currentDataURL);
-        };
-        
-        img.src = dataURL;
-      });
-    }
-    
-    // Update file information display
-    function updateFileInfo(dataURL, format) {
-      // Format is always JPEG
-      infoFormat.textContent = "JPEG";
-      
-      // Size
-      const sizeKB = Math.round((dataURL.length * 0.75) / 1024);
-      infoSize.textContent = `${sizeKB} KB`;
-      
-      // Get dimensions
-      const img = new Image();
-      img.onload = () => {
-        infoDimensions.textContent = `${img.width} × ${img.height}`;
-      };
-      img.src = dataURL;
-    }
-    
-    // Download image
-    function downloadImage() {
-      if (!processedImageDataURL) return;
-      
-      // Always use .jpg extension
-      const fileNameWithExtension = `${fileName}.jpg`;
-      
-      // Create download link
-      const link = document.createElement("a");
-      link.href = processedImageDataURL;
-      link.download = fileNameWithExtension;
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-      
-      // Show success message
-      downloadBtn.textContent = "✓ Downloaded!";
-      setTimeout(() => {
-        downloadBtn.textContent = `⬇️ Download (${currentSize === 'original' ? 'Original' : currentSize + 'KB'})`;
-      }, 2000);
-    }
-    
-    // Toggle theme
-    function toggleTheme() {
-      const body = document.body;
-      const currentTheme = body.getAttribute("data-theme");
-      const newTheme = currentTheme === "light" ? "dark" : "light";
-      
-      body.setAttribute("data-theme", newTheme);
-      themeToggle.textContent = newTheme === "light" ? "🌙" : "☀️";
-      
-      // Save theme preference
-      localStorage.setItem("theme", newTheme);
-    }
-    
-    // Load saved theme
-    function loadSavedTheme() {
-      const savedTheme = localStorage.getItem("theme") || "light";
-      document.body.setAttribute("data-theme", savedTheme);
-      themeToggle.textContent = savedTheme === "light" ? "🌙" : "☀️";
-    }
-    
-    // Mobile detection and optimizations
-    function checkMobile() {
-      if (window.innerWidth <= 768) {
-        // Mobile optimizations
-        document.body.style.padding = "15px 10px";
-      }
-    }
-    
-    // Initialize
-    window.addEventListener('load', () => {
-      loadSavedTheme();
-      checkMobile();
-    });
-    
-    window.addEventListener('resize', checkMobile);
-  </script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('nav a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                
+                window.scrollTo({
+                    top: targetSection.offsetTop - 80,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
