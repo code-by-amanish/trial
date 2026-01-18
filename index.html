@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Image Size Reducer | PAN Aadhaar Voter Photo Resizer Online Free</title>
-  <meta name="description" content="100% Secure Image Size Reducer - No data upload. Resize photos for PAN Card, Aadhaar, Voter ID, Passport instantly to 25KB-300KB. Local processing, PDF export. Free online tool.">
+  <meta name="description" content="100% Secure Image Size Reducer - No data upload. Resize photos for PAN Card, Aadhaar, Voter ID, Passport instantly to 20KB-300KB. Local processing, PDF export. Free online tool.">
   <meta name="keywords" content="image size reducer, photo resizer, PAN card photo size, Aadhaar photo resize, voter ID photo compressor, signature resize, image compressor online free, secure image compressor">
   
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -19,6 +19,7 @@
       --dark: #1e293b;
       --gray: #64748b;
       --success: #10b981;
+      --error: #ef4444;
       --border: #e2e8f0;
       --shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
       --radius: 16px;
@@ -48,6 +49,7 @@
       justify-content: center;
       align-items: center;
       transition: background 0.3s, color 0.3s;
+      overflow-x: hidden;
     }
     
     .container {
@@ -83,7 +85,7 @@
     }
     
     h1 {
-      font-size: 2.2rem;
+      font-size: 2rem;
       background: linear-gradient(135deg, var(--primary), var(--secondary));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -98,7 +100,7 @@
     
     /* Theme Toggle */
     .theme-toggle {
-      position: absolute;
+      position: fixed;
       top: 20px;
       right: 20px;
       width: 50px;
@@ -113,6 +115,7 @@
       font-size: 1.2rem;
       color: var(--dark);
       transition: all 0.3s;
+      z-index: 1000;
     }
     
     .theme-toggle:hover {
@@ -130,6 +133,7 @@
     @media (max-width: 768px) {
       .app-wrapper {
         grid-template-columns: 1fr;
+        gap: 20px;
       }
     }
     
@@ -137,15 +141,16 @@
     .upload-section {
       background: var(--light);
       border-radius: var(--radius);
-      padding: 30px;
+      padding: 25px;
       box-shadow: var(--shadow);
       border: 2px solid var(--border);
+      height: fit-content;
     }
     
     .upload-area {
       border: 3px dashed var(--border);
       border-radius: 12px;
-      padding: 40px 20px;
+      padding: 30px 20px;
       text-align: center;
       cursor: pointer;
       transition: all 0.3s;
@@ -158,7 +163,7 @@
     }
     
     .upload-icon {
-      font-size: 3rem;
+      font-size: 2.5rem;
       margin-bottom: 15px;
       color: var(--primary);
     }
@@ -166,6 +171,7 @@
     .upload-text h3 {
       margin-bottom: 10px;
       color: var(--dark);
+      font-size: 1.2rem;
     }
     
     .upload-text p {
@@ -181,23 +187,25 @@
     .controls-section {
       background: var(--light);
       border-radius: var(--radius);
-      padding: 30px;
+      padding: 25px;
       box-shadow: var(--shadow);
       border: 2px solid var(--border);
+      height: fit-content;
     }
     
     .control-group {
-      margin-bottom: 25px;
+      margin-bottom: 20px;
     }
     
     .control-label {
       display: block;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-weight: 600;
       color: var(--dark);
       display: flex;
       align-items: center;
       gap: 8px;
+      font-size: 0.95rem;
     }
     
     .control-label i {
@@ -206,13 +214,13 @@
     
     select, input {
       width: 100%;
-      padding: 14px 18px;
+      padding: 12px 16px;
       border-radius: 10px;
       border: 2px solid var(--border);
       background: var(--light);
       color: var(--dark);
       font-family: 'Poppins', sans-serif;
-      font-size: 0.95rem;
+      font-size: 0.9rem;
       transition: all 0.3s;
     }
     
@@ -225,8 +233,8 @@
     .size-options {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: 12px;
-      margin-top: 10px;
+      gap: 10px;
+      margin-top: 8px;
     }
     
     .size-option {
@@ -240,22 +248,25 @@
     
     .size-option:hover {
       border-color: var(--primary);
+      transform: translateY(-2px);
     }
     
     .size-option.active {
       background: var(--primary);
       color: white;
       border-color: var(--primary);
+      box-shadow: 0 5px 15px rgba(99, 102, 241, 0.3);
     }
     
     .size-kb {
       font-weight: 700;
-      font-size: 1.1rem;
+      font-size: 1rem;
     }
     
     .size-desc {
-      font-size: 0.8rem;
-      opacity: 0.8;
+      font-size: 0.75rem;
+      opacity: 0.9;
+      margin-top: 4px;
     }
     
     /* Crop Container */
@@ -266,7 +277,7 @@
     
     .crop-wrapper {
       width: 100%;
-      max-height: 300px;
+      max-height: 250px;
       overflow: hidden;
       border-radius: 12px;
       margin-bottom: 15px;
@@ -274,28 +285,26 @@
     
     .crop-controls {
       display: flex;
+      flex-direction: column;
       gap: 10px;
       margin-bottom: 15px;
     }
     
-    .crop-controls button {
-      flex: 1;
-    }
-    
     /* Buttons */
     .btn {
-      padding: 16px 24px;
+      padding: 14px 20px;
       border-radius: 12px;
       border: none;
       font-family: 'Poppins', sans-serif;
       font-weight: 600;
-      font-size: 1rem;
+      font-size: 0.95rem;
       cursor: pointer;
       transition: all 0.3s;
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 8px;
+      width: 100%;
     }
     
     .btn-primary {
@@ -328,14 +337,14 @@
     /* Preview Section */
     .preview-section {
       text-align: center;
-      margin-top: 30px;
+      margin-top: 25px;
     }
     
     .preview-container {
       display: none;
       background: var(--light);
       border-radius: var(--radius);
-      padding: 25px;
+      padding: 20px;
       box-shadow: var(--shadow);
       border: 2px solid var(--border);
       margin-bottom: 20px;
@@ -345,41 +354,48 @@
       text-align: left;
       margin-bottom: 15px;
       color: var(--dark);
+      font-size: 1.2rem;
     }
     
     .image-preview {
       max-width: 100%;
-      max-height: 250px;
+      max-height: 200px;
       border-radius: 10px;
       margin-bottom: 15px;
       box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      object-fit: contain;
     }
     
     .file-info {
       display: flex;
       justify-content: space-between;
       background: rgba(99, 102, 241, 0.1);
-      padding: 15px;
+      padding: 12px;
       border-radius: 10px;
       margin-top: 15px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
+      flex-wrap: wrap;
+      gap: 10px;
     }
     
     .info-item {
       text-align: center;
+      flex: 1;
+      min-width: 80px;
     }
     
     .info-value {
       font-weight: 700;
       color: var(--primary);
+      font-size: 0.9rem;
     }
     
     /* Security Info */
     .security-info {
       background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(139, 92, 246, 0.1));
       border-radius: var(--radius);
-      padding: 25px;
-      margin-top: 30px;
+      padding: 20px;
+      margin-top: 25px;
       border-left: 5px solid var(--success);
     }
     
@@ -387,13 +403,14 @@
       display: flex;
       align-items: center;
       gap: 10px;
-      margin-bottom: 15px;
+      margin-bottom: 10px;
       color: var(--success);
     }
     
     .security-text {
       color: var(--gray);
       line-height: 1.6;
+      font-size: 0.9rem;
     }
     
     .highlight {
@@ -404,21 +421,38 @@
     /* Footer */
     footer {
       text-align: center;
-      margin-top: 40px;
+      margin-top: 30px;
       color: var(--gray);
-      font-size: 0.9rem;
-      padding-top: 20px;
+      font-size: 0.85rem;
+      padding-top: 15px;
       border-top: 1px solid var(--border);
     }
     
-    /* Responsive */
-    @media (max-width: 768px) {
-      h1 {
-        font-size: 1.8rem;
+    /* Loading Spinner */
+    .spinner {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 4px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 10px auto;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    /* Mobile Optimizations */
+    @media (max-width: 480px) {
+      body {
+        padding: 15px;
       }
       
-      .app-wrapper {
-        gap: 20px;
+      h1 {
+        font-size: 1.6rem;
       }
       
       .upload-section, .controls-section {
@@ -427,6 +461,26 @@
       
       .size-options {
         grid-template-columns: 1fr;
+      }
+      
+      .btn {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+      }
+      
+      .theme-toggle {
+        top: 15px;
+        right: 15px;
+        width: 45px;
+        height: 45px;
+      }
+    }
+    
+    /* Fix for mobile viewport */
+    @media (max-width: 768px) {
+      body {
+        align-items: flex-start;
+        padding-top: 70px;
       }
     }
   </style>
@@ -463,7 +517,7 @@
             <img id="cropImage">
           </div>
           <div class="crop-controls">
-            <select id="ratioSelect" class="btn-secondary">
+            <select id="ratioSelect" class="btn-secondary" style="padding: 12px;">
               <option value="free">Free Crop</option>
               <option value="1">Square (1:1)</option>
               <option value="3/4">Document (3:4)</option>
@@ -480,6 +534,11 @@
         <div class="control-group">
           <label class="control-label"><i>📏</i> Target Size</label>
           <div class="size-options">
+            <!-- ✅ 20 KB ADDED HERE -->
+            <div class="size-option active" data-size="20">
+              <div class="size-kb">20 KB</div>
+              <div class="size-desc">Aadhaar Small</div>
+            </div>
             <div class="size-option" data-size="25">
               <div class="size-kb">25 KB</div>
               <div class="size-desc">PAN Card</div>
@@ -496,60 +555,55 @@
               <div class="size-kb">300 KB</div>
               <div class="size-desc">Voter ID</div>
             </div>
-            <div class="size-option active" data-size="original">
+            <div class="size-option" data-size="original">
               <div class="size-kb">Original</div>
               <div class="size-desc">Keep size</div>
             </div>
-            <div class="size-option" data-size="custom">
-              <div class="size-kb">Custom</div>
-              <div class="size-desc">Enter size</div>
-            </div>
-          </div>
-          <div id="customSizeContainer" style="display: none; margin-top: 15px;">
-            <input type="number" id="customSizeInput" placeholder="Enter size in KB" min="10" max="5000">
-            <small style="color: var(--gray); display: block; margin-top: 5px;">Min: 10KB, Max: 5000KB</small>
           </div>
         </div>
         
         <div class="control-group">
           <label class="control-label"><i>🖼️</i> Output Format</label>
+          <!-- ✅ ONLY JPEG FORMAT -->
           <select id="formatSelect">
-            <option value="jpg">JPG (Recommended)</option>
-            <option value="png">PNG (Lossless)</option>
-            <option value="webp">WebP (Modern)</option>
-            <option value="pdf">PDF Document</option>
+            <option value="jpg" selected>JPEG (Recommended)</option>
           </select>
+          <small style="color: var(--gray); display: block; margin-top: 5px;">Only JPEG format for best compatibility</small>
         </div>
         
         <div class="control-group">
           <label class="control-label"><i>📝</i> File Name</label>
           <input type="text" id="fileNameInput" placeholder="my-resized-image" value="resized-image">
+          <small style="color: var(--gray); display: block; margin-top: 5px;">File will be saved as .jpg</small>
         </div>
         
         <div class="control-group">
           <label class="control-label"><i>⚙️</i> Image Quality</label>
           <select id="qualitySelect">
             <option value="1">High (Best Quality)</option>
-            <option value="0.8" selected>Good (Recommended)</option>
-            <option value="0.6">Medium (Balanced)</option>
-            <option value="0.4">Low (Smaller Size)</option>
+            <option value="0.9" selected>Very Good</option>
+            <option value="0.8">Good (Recommended)</option>
+            <option value="0.7">Medium</option>
+            <option value="0.6">Low</option>
           </select>
         </div>
         
-        <button id="processBtn" class="btn btn-primary" disabled>🔄 Process Image</button>
-        <button id="downloadBtn" class="btn btn-primary" style="margin-top: 15px;" disabled>⬇️ Download Image</button>
+        <button id="processBtn" class="btn btn-primary" disabled>🔄 Process & Resize</button>
+        <button id="downloadBtn" class="btn btn-primary" style="margin-top: 10px; background: var(--success);" disabled>⬇️ Download JPEG</button>
+        
+        <div class="spinner" id="loadingSpinner"></div>
       </section>
     </div>
     
     <!-- Preview Section -->
     <section class="preview-section">
       <div class="preview-container" id="previewContainer">
-        <h3 class="preview-title">Preview</h3>
+        <h3 class="preview-title">Resized Image Preview</h3>
         <img id="croppedPreview" class="image-preview">
         <div class="file-info" id="fileInfo">
           <div class="info-item">
             <div>Format</div>
-            <div class="info-value" id="infoFormat">-</div>
+            <div class="info-value" id="infoFormat">JPEG</div>
           </div>
           <div class="info-item">
             <div>Size</div>
@@ -571,8 +625,8 @@
       </div>
       <p class="security-text">
         Your images are processed locally in your browser. <span class="highlight">No data is uploaded to any server.</span> 
-        This tool is perfect for resizing sensitive documents like <span class="highlight">PAN Card, Aadhaar Card, Voter ID, Passport photos, and signatures</span> 
-        while ensuring complete privacy and security.
+        This tool is perfect for resizing sensitive documents like <span class="highlight">PAN Card, Aadhaar Card, Voter ID, Passport photos</span> 
+        while ensuring complete privacy and security. Works perfectly on <span class="highlight">mobile phones and desktop</span>.
       </p>
     </div>
     
@@ -593,8 +647,6 @@
     const cropBtn = document.getElementById("cropBtn");
     const ratioSelect = document.getElementById("ratioSelect");
     const sizeOptions = document.querySelectorAll(".size-option");
-    const customSizeContainer = document.getElementById("customSizeContainer");
-    const customSizeInput = document.getElementById("customSizeInput");
     const formatSelect = document.getElementById("formatSelect");
     const fileNameInput = document.getElementById("fileNameInput");
     const qualitySelect = document.getElementById("qualitySelect");
@@ -603,6 +655,7 @@
     const croppedPreview = document.getElementById("croppedPreview");
     const previewContainer = document.getElementById("previewContainer");
     const themeToggle = document.getElementById("themeToggle");
+    const loadingSpinner = document.getElementById("loadingSpinner");
     
     // Info display elements
     const infoFormat = document.getElementById("infoFormat");
@@ -613,20 +666,33 @@
     let cropper = null;
     let originalImageDataURL = null;
     let processedImageDataURL = null;
-    let currentFormat = "jpg";
-    let currentSize = "original";
+    let currentSize = "20"; // Default to 20KB
     let fileName = "resized-image";
+    let isProcessing = false;
     
     // Initialize
     document.addEventListener("DOMContentLoaded", () => {
-      // Set up event listeners
       setupEventListeners();
       
-      // Update file name when user types
+      // Set default file name
       fileNameInput.addEventListener("input", (e) => {
         fileName = e.target.value || "resized-image";
       });
+      
+      // Set 20KB as default active
+      setActiveSizeOption("20");
     });
+    
+    // Set active size option
+    function setActiveSizeOption(size) {
+      sizeOptions.forEach(option => {
+        option.classList.remove("active");
+        if (option.getAttribute("data-size") === size) {
+          option.classList.add("active");
+        }
+      });
+      currentSize = size;
+    }
     
     // Set up all event listeners
     function setupEventListeners() {
@@ -676,45 +742,19 @@
       // Size options
       sizeOptions.forEach(option => {
         option.addEventListener("click", () => {
-          // Remove active class from all options
-          sizeOptions.forEach(opt => opt.classList.remove("active"));
-          // Add active class to clicked option
-          option.classList.add("active");
-          
-          currentSize = option.getAttribute("data-size");
-          
-          // Show/hide custom size input
-          if (currentSize === "custom") {
-            customSizeContainer.style.display = "block";
-          } else {
-            customSizeContainer.style.display = "none";
-          }
+          const size = option.getAttribute("data-size");
+          setActiveSizeOption(size);
           
           // If we already have a processed image, update it
-          if (processedImageDataURL) {
+          if (processedImageDataURL && !isProcessing) {
             updateProcessedImage();
           }
         });
       });
       
-      // Custom size input
-      customSizeInput.addEventListener("input", () => {
-        if (processedImageDataURL) {
-          updateProcessedImage();
-        }
-      });
-      
-      // Format select
-      formatSelect.addEventListener("change", () => {
-        currentFormat = formatSelect.value;
-        if (processedImageDataURL) {
-          updateProcessedImage();
-        }
-      });
-      
       // Quality select
       qualitySelect.addEventListener("change", () => {
-        if (processedImageDataURL) {
+        if (processedImageDataURL && !isProcessing) {
           updateProcessedImage();
         }
       });
@@ -727,6 +767,10 @@
       
       // Theme toggle
       themeToggle.addEventListener("click", toggleTheme);
+      
+      // Mobile touch improvements
+      document.addEventListener('touchstart', function() {}, {passive: true});
+      document.addEventListener('touchmove', function() {}, {passive: true});
     }
     
     // Handle image upload
@@ -762,25 +806,33 @@
         }
         
         // Initialize cropper
-        cropper = new Cropper(cropImage, {
-          viewMode: 1,
-          autoCropArea: 1,
-          background: false,
-          responsive: true,
-          guides: true,
-          highlight: false,
-          movable: true,
-          rotatable: true,
-          scalable: true,
-          zoomable: true,
-          zoomOnTouch: true,
-          zoomOnWheel: true,
-          wheelZoomRatio: 0.1,
-          ready() {
-            // Enable process button
-            processBtn.disabled = false;
-          }
-        });
+        setTimeout(() => {
+          cropper = new Cropper(cropImage, {
+            viewMode: 1,
+            autoCropArea: 0.8,
+            background: false,
+            responsive: true,
+            guides: true,
+            highlight: false,
+            movable: true,
+            rotatable: true,
+            scalable: true,
+            zoomable: true,
+            zoomOnTouch: true,
+            zoomOnWheel: true,
+            wheelZoomRatio: 0.1,
+            ready() {
+              // Enable process button
+              processBtn.disabled = false;
+              
+              // Auto-crop for mobile
+              if (window.innerWidth <= 768) {
+                cropper.setAspectRatio(3/4);
+                ratioSelect.value = "3/4";
+              }
+            }
+          });
+        }, 100);
         
         // Set default file name
         fileName = file.name.replace(/\.[^/.]+$/, "") || "resized-image";
@@ -789,6 +841,7 @@
         // Reset preview
         previewContainer.style.display = "none";
         downloadBtn.disabled = true;
+        processedImageDataURL = null;
       };
       
       reader.readAsDataURL(file);
@@ -798,34 +851,46 @@
     function performCrop() {
       if (!cropper) return;
       
-      // Get cropped canvas
-      const canvas = cropper.getCroppedCanvas();
-      originalImageDataURL = canvas.toDataURL("image/jpeg", 1);
+      // Show loading
+      loadingSpinner.style.display = "block";
+      cropBtn.disabled = true;
       
-      // Show preview
-      croppedPreview.src = originalImageDataURL;
-      previewContainer.style.display = "block";
-      
-      // Update file info
-      updateFileInfo(originalImageDataURL, "jpg");
-      
-      // Enable download button
-      downloadBtn.disabled = false;
-      downloadBtn.textContent = "⬇️ Download Original";
-      
-      // Set processed image to original
-      processedImageDataURL = originalImageDataURL;
+      setTimeout(() => {
+        // Get cropped canvas
+        const canvas = cropper.getCroppedCanvas();
+        originalImageDataURL = canvas.toDataURL("image/jpeg", 1);
+        
+        // Show preview
+        croppedPreview.src = originalImageDataURL;
+        previewContainer.style.display = "block";
+        
+        // Update file info
+        updateFileInfo(originalImageDataURL, "jpg");
+        
+        // Process image automatically
+        processImage();
+        
+        // Hide loading
+        loadingSpinner.style.display = "none";
+        cropBtn.disabled = false;
+      }, 100);
     }
     
     // Process image based on selected options
     function processImage() {
-      if (!originalImageDataURL) return;
+      if (!originalImageDataURL || isProcessing) return;
       
-      const canvas = document.createElement("canvas");
-      const ctx = canvas.getContext("2d");
+      isProcessing = true;
+      processBtn.disabled = true;
+      processBtn.textContent = "Processing...";
+      loadingSpinner.style.display = "block";
+      
       const img = new Image();
       
       img.onload = () => {
+        const canvas = document.createElement("canvas");
+        const ctx = canvas.getContext("2d");
+        
         // Set canvas dimensions
         canvas.width = img.width;
         canvas.height = img.height;
@@ -836,38 +901,14 @@
         // Get quality value
         const quality = parseFloat(qualitySelect.value);
         
-        // Get format
-        const format = formatSelect.value;
+        // First convert to JPEG with quality
+        let dataURL = canvas.toDataURL("image/jpeg", quality);
         
-        // Convert to data URL with selected format and quality
-        let dataURL;
-        switch (format) {
-          case "png":
-            dataURL = canvas.toDataURL("image/png");
-            break;
-          case "webp":
-            dataURL = canvas.toDataURL("image/webp", quality);
-            break;
-          case "pdf":
-            // For PDF, we'll handle it differently in download
-            dataURL = canvas.toDataURL("image/jpeg", quality);
-            break;
-          default: // jpg
-            dataURL = canvas.toDataURL("image/jpeg", quality);
-        }
-        
-        // Resize if needed
+        // Resize if needed (not original)
         if (currentSize !== "original") {
-          let targetKB;
-          
-          if (currentSize === "custom") {
-            targetKB = parseInt(customSizeInput.value) || 100;
-          } else {
-            targetKB = parseInt(currentSize);
-          }
-          
+          const targetKB = parseInt(currentSize);
           if (targetKB > 0) {
-            dataURL = resizeImageToTargetSize(dataURL, targetKB, format, quality);
+            dataURL = resizeImageToTargetSize(dataURL, targetKB, quality);
           }
         }
         
@@ -876,11 +917,30 @@
         croppedPreview.src = processedImageDataURL;
         
         // Update file info
-        updateFileInfo(processedImageDataURL, format);
+        updateFileInfo(processedImageDataURL, "jpg");
         
         // Enable download button
         downloadBtn.disabled = false;
-        downloadBtn.textContent = `⬇️ Download ${format.toUpperCase()}`;
+        downloadBtn.textContent = `⬇️ Download (${currentSize === 'original' ? 'Original' : currentSize + 'KB'})`;
+        
+        // Reset processing state
+        isProcessing = false;
+        processBtn.disabled = false;
+        processBtn.textContent = "🔄 Process & Resize";
+        loadingSpinner.style.display = "none";
+        
+        // Scroll to preview on mobile
+        if (window.innerWidth <= 768) {
+          previewContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      };
+      
+      img.onerror = () => {
+        isProcessing = false;
+        processBtn.disabled = false;
+        processBtn.textContent = "🔄 Process & Resize";
+        loadingSpinner.style.display = "none";
+        alert("Error loading image. Please try again.");
       };
       
       img.src = originalImageDataURL;
@@ -888,13 +948,12 @@
     
     // Update processed image when settings change
     function updateProcessedImage() {
-      if (!originalImageDataURL) return;
-      
+      if (!originalImageDataURL || isProcessing) return;
       processImage();
     }
     
     // Resize image to target size in KB
-    function resizeImageToTargetSize(dataURL, targetKB, format, quality) {
+    function resizeImageToTargetSize(dataURL, targetKB, quality) {
       const img = new Image();
       
       return new Promise((resolve) => {
@@ -908,24 +967,17 @@
           
           let currentDataURL;
           let currentSizeKB;
+          let attempts = 0;
+          const maxAttempts = 15;
           
           // Reduce size step by step
-          for (let i = 0; i < 20; i++) {
+          while (attempts < maxAttempts) {
             canvas.width = width;
             canvas.height = height;
             ctx.drawImage(img, 0, 0, width, height);
             
-            // Convert to data URL with current format and quality
-            switch (format) {
-              case "png":
-                currentDataURL = canvas.toDataURL("image/png");
-                break;
-              case "webp":
-                currentDataURL = canvas.toDataURL("image/webp", quality);
-                break;
-              default: // jpg
-                currentDataURL = canvas.toDataURL("image/jpeg", quality);
-            }
+            // Convert to JPEG
+            currentDataURL = canvas.toDataURL("image/jpeg", quality);
             
             // Calculate size in KB
             currentSizeKB = Math.round((currentDataURL.length * 0.75) / 1024);
@@ -936,9 +988,11 @@
               return;
             }
             
-            // Reduce dimensions by 10%
-            width = Math.floor(width * 0.9);
-            height = Math.floor(height * 0.9);
+            // Reduce dimensions by 5-10% based on how far we are
+            const reduction = currentSizeKB > targetKB * 2 ? 0.85 : 0.92;
+            width = Math.floor(width * reduction);
+            height = Math.floor(height * reduction);
+            attempts++;
           }
           
           // If we still haven't reached target size, return the smallest we got
@@ -951,8 +1005,8 @@
     
     // Update file information display
     function updateFileInfo(dataURL, format) {
-      // Format
-      infoFormat.textContent = format.toUpperCase();
+      // Format is always JPEG
+      infoFormat.textContent = "JPEG";
       
       // Size
       const sizeKB = Math.round((dataURL.length * 0.75) / 1024);
@@ -970,28 +1024,22 @@
     function downloadImage() {
       if (!processedImageDataURL) return;
       
-      const format = formatSelect.value;
-      const fileNameWithExtension = `${fileName}.${format === "jpg" ? "jpg" : format}`;
+      // Always use .jpg extension
+      const fileNameWithExtension = `${fileName}.jpg`;
       
-      if (format === "pdf") {
-        // Create PDF
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
-        const imgProps = pdf.getImageProperties(processedImageDataURL);
-        const pdfWidth = pdf.internal.pageSize.getWidth();
-        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
-        
-        pdf.addImage(processedImageDataURL, "JPEG", 0, 0, pdfWidth, pdfHeight);
-        pdf.save(`${fileName}.pdf`);
-      } else {
-        // Create download link for image
-        const link = document.createElement("a");
-        link.href = processedImageDataURL;
-        link.download = fileNameWithExtension;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-      }
+      // Create download link
+      const link = document.createElement("a");
+      link.href = processedImageDataURL;
+      link.download = fileNameWithExtension;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      
+      // Show success message
+      downloadBtn.textContent = "✓ Downloaded!";
+      setTimeout(() => {
+        downloadBtn.textContent = `⬇️ Download (${currentSize === 'original' ? 'Original' : currentSize + 'KB'})`;
+      }, 2000);
     }
     
     // Toggle theme
@@ -1010,12 +1058,25 @@
     // Load saved theme
     function loadSavedTheme() {
       const savedTheme = localStorage.getItem("theme") || "light";
-      body.setAttribute("data-theme", savedTheme);
+      document.body.setAttribute("data-theme", savedTheme);
       themeToggle.textContent = savedTheme === "light" ? "🌙" : "☀️";
     }
     
-    // Initialize theme
-    loadSavedTheme();
+    // Mobile detection and optimizations
+    function checkMobile() {
+      if (window.innerWidth <= 768) {
+        // Mobile optimizations
+        document.body.style.padding = "15px 10px";
+      }
+    }
+    
+    // Initialize
+    window.addEventListener('load', () => {
+      loadSavedTheme();
+      checkMobile();
+    });
+    
+    window.addEventListener('resize', checkMobile);
   </script>
 </body>
 </html>
