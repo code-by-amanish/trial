@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Incredible India - States Information</title>
+    <title>India Explorer - State Information</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
@@ -164,7 +164,7 @@
         
         .states-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
         }
@@ -175,7 +175,6 @@
             overflow: hidden;
             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
-            height: 220px;
             display: flex;
             flex-direction: column;
             position: relative;
@@ -186,37 +185,112 @@
             box-shadow: 0 12px 20px rgba(0,0,0,0.12);
         }
         
-        .state-placeholder {
-            height: 70%;
-            background-color: var(--light-blue);
+        .state-header {
+            height: 40%;
+            background: linear-gradient(135deg, var(--saffron), var(--green));
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 1rem;
+            padding: 1.5rem;
+            position: relative;
         }
         
-        .placeholder-content {
+        .state-placeholder {
             text-align: center;
-            color: var(--blue);
-            font-weight: 500;
+            color: white;
+            font-weight: 600;
         }
         
-        .placeholder-content i {
-            font-size: 2rem;
+        .state-placeholder i {
+            font-size: 2.2rem;
             margin-bottom: 0.8rem;
+            display: block;
+            color: white;
+        }
+        
+        .state-placeholder h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        
+        .state-placeholder .name-placeholder {
+            background-color: rgba(255,255,255,0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            margin: 0.3rem 0;
+            min-width: 180px;
+        }
+        
+        .state-content {
+            padding: 1.5rem;
+            height: 60%;
+        }
+        
+        .capital-info {
+            background-color: var(--light-blue);
+            padding: 1rem;
+            border-radius: 6px;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--blue);
+        }
+        
+        .capital-info h4 {
+            color: var(--blue);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .capital-placeholder {
+            background-color: rgba(255,255,255,0.8);
+            padding: 0.5rem;
+            border-radius: 4px;
+            font-weight: 500;
+            color: var(--dark-gray);
+            min-height: 28px;
+        }
+        
+        .state-details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+        
+        .detail-item {
+            background-color: var(--gray);
+            padding: 0.8rem;
+            border-radius: 4px;
+            text-align: center;
+        }
+        
+        .detail-item i {
             color: var(--saffron);
+            margin-bottom: 0.3rem;
             display: block;
         }
         
-        .state-info {
-            padding: 1.2rem;
-            height: 30%;
-            background-color: var(--gray);
+        .detail-placeholder {
+            background-color: rgba(255,255,255,0.8);
+            padding: 0.3rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            min-height: 20px;
+            margin-top: 0.3rem;
         }
         
-        .state-info p {
+        .placeholder-hint {
+            text-align: center;
             color: #666;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            font-style: italic;
+            margin-top: 2.5rem;
+            padding: 1rem;
+            background-color: rgba(0,0,128,0.05);
+            border-radius: 6px;
+            border-left: 3px solid var(--saffron);
         }
         
         footer {
@@ -252,7 +326,7 @@
             }
             
             .states-grid {
-                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
                 gap: 1.5rem;
             }
             
@@ -260,6 +334,10 @@
                 padding: 0.5rem 1rem;
                 margin: 0.2rem;
                 font-size: 0.9rem;
+            }
+            
+            .state-details {
+                grid-template-columns: 1fr;
             }
         }
         
@@ -281,138 +359,313 @@
 <body>
     <header>
         <div class="header-content">
-            <h1>Incredible India</h1>
+            <h1>India Explorer</h1>
             <div class="ashoka-chakra">☸</div>
-            <p class="tagline">Unity in Diversity</p>
-            <p>Explore the rich cultural heritage, diversity, and beauty of India and its states</p>
+            <p class="tagline">Discover the Diversity of Indian States</p>
+            <p>A platform to explore information about all Indian states and their capitals</p>
         </div>
     </header>
     
     <nav>
         <div class="nav-container">
-            <a href="#about"><i class="fas fa-info-circle"></i> About India</a>
+            <a href="#about"><i class="fas fa-info-circle"></i> About</a>
             <a href="#states"><i class="fas fa-map-marked-alt"></i> States</a>
-            <a href="#culture"><i class="fas fa-monument"></i> Culture</a>
-            <a href="#geography"><i class="fas fa-mountain"></i> Geography</a>
-            <a href="#tourism"><i class="fas fa-umbrella-beach"></i> Tourism</a>
+            <a href="#features"><i class="fas fa-star"></i> Features</a>
+            <a href="#structure"><i class="fas fa-sitemap"></i> Structure</a>
         </div>
     </nav>
     
     <div class="container">
         <section id="about" class="intro">
-            <h2><i class="fas fa-flag"></i> About India</h2>
-            <p>India, officially the Republic of India, is a country in South Asia. It is the seventh-largest country by area and the second-most populous country in the world. India is a federal union comprising 28 states and 8 union territories. The Indian subcontinent was home to the ancient Indus Valley Civilization and is the birthplace of four major world religions: Hinduism, Buddhism, Jainism, and Sikhism.</p>
-            <p>India became an independent nation in 1947 after a struggle for independence that was marked by non-violent resistance led by Mahatma Gandhi. The Constitution of India, adopted in 1950, established a secular and democratic republic.</p>
+            <h2><i class="fas fa-flag"></i> About This Platform</h2>
+            <p>This website provides a structured framework to display information about all Indian states and their capitals. The design includes dedicated placeholders for state names and capital cities, allowing for organized content presentation without displaying actual names.</p>
+            <p>Each state card follows a consistent layout with sections for the state name, capital city, and key details about population, language, and area. This template can be easily populated with actual data when required.</p>
             
             <div class="stats">
                 <div class="stat-card">
                     <i class="fas fa-landmark"></i>
-                    <h3>28 States</h3>
-                    <p>Each with unique culture & identity</p>
+                    <h3>State Name Placeholder</h3>
+                    <p>Dedicated space for state identification</p>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-language"></i>
-                    <h3>22 Official Languages</h3>
-                    <p>With hundreds of dialects</p>
+                    <i class="fas fa-city"></i>
+                    <h3>Capital Placeholder</h3>
+                    <p>Separate section for capital city information</p>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-users"></i>
-                    <h3>1.4 Billion People</h3>
-                    <p>Second most populous country</p>
+                    <i class="fas fa-layer-group"></i>
+                    <h3>Organized Layout</h3>
+                    <p>Structured information presentation</p>
                 </div>
                 <div class="stat-card">
-                    <i class="fas fa-map"></i>
-                    <h3>3.287 Million km²</h3>
-                    <p>Seventh largest country by area</p>
+                    <i class="fas fa-palette"></i>
+                    <h3>Indian Theme</h3>
+                    <p>Colors representing national identity</p>
                 </div>
             </div>
         </section>
         
         <section id="states" class="states-section">
-            <h2 class="section-title">States of India</h2>
-            <p style="text-align: center; margin-bottom: 1.5rem; color: #555;">Each state has a designated area below for detailed information. Click on any state area to explore.</p>
+            <h2 class="section-title">Indian States Information</h2>
+            <p style="text-align: center; margin-bottom: 1.5rem; color: #555;">Each card below represents an Indian state with dedicated placeholders for state name and capital.</p>
             
             <div class="states-grid">
-                <!-- State 1 -->
+                <!-- State Card 1 -->
                 <div class="state-card">
-                    <div class="state-placeholder">
-                        <div class="placeholder-content">
-                            <i class="fas fa-map-pin"></i>
-                            <p>Information about this state will appear here</p>
+                    <div class="state-header">
+                        <div class="state-placeholder">
+                            <i class="fas fa-map-marked-alt"></i>
+                            <h3>State</h3>
+                            <div class="name-placeholder">State Name Placeholder</div>
                         </div>
                     </div>
-                    <div class="state-info">
-                        <p>Details about culture, population, capital, and important facts will be displayed in this section.</p>
+                    <div class="state-content">
+                        <div class="capital-info">
+                            <h4><i class="fas fa-city"></i> Capital</h4>
+                            <div class="capital-placeholder">Capital Name Placeholder</div>
+                        </div>
+                        <div class="state-details">
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <div>Population</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-language"></i>
+                                <div>Language</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-arrows-alt"></i>
+                                <div>Area</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>Formation</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- State 2 -->
+                <!-- State Card 2 -->
                 <div class="state-card">
-                    <div class="state-placeholder">
-                        <div class="placeholder-content">
-                            <i class="fas fa-landmark"></i>
-                            <p>State details placeholder</p>
-                        </div>
-                    </div>
-                    <div class="state-info">
-                        <p>Famous landmarks, tourist attractions, and economic information will be shown here.</p>
-                    </div>
-                </div>
-                
-                <!-- State 3 -->
-                <div class="state-card">
-                    <div class="state-placeholder">
-                        <div class="placeholder-content">
-                            <i class="fas fa-utensils"></i>
-                            <p>Cuisine & traditions information</p>
-                        </div>
-                    </div>
-                    <div class="state-info">
-                        <p>Local cuisine, festivals, traditional clothing, and cultural practices of this state.</p>
-                    </div>
-                </div>
-                
-                <!-- State 4 -->
-                <div class="state-card">
-                    <div class="state-placeholder">
-                        <div class="placeholder-content">
-                            <i class="fas fa-industry"></i>
-                            <p>Economic & industrial data</p>
-                        </div>
-                    </div>
-                    <div class="state-info">
-                        <p>Key industries, agricultural products, economic contributions and development indicators.</p>
-                    </div>
-                </div>
-                
-                <!-- State 5 -->
-                <div class="state-card">
-                    <div class="state-placeholder">
-                        <div class="placeholder-content">
+                    <div class="state-header">
+                        <div class="state-placeholder">
                             <i class="fas fa-mountain"></i>
-                            <p>Geographical information</p>
+                            <h3>State</h3>
+                            <div class="name-placeholder">State Name Placeholder</div>
                         </div>
                     </div>
-                    <div class="state-info">
-                        <p>Location, geography, climate, natural resources, and environmental features of the state.</p>
+                    <div class="state-content">
+                        <div class="capital-info">
+                            <h4><i class="fas fa-city"></i> Capital</h4>
+                            <div class="capital-placeholder">Capital Name Placeholder</div>
+                        </div>
+                        <div class="state-details">
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <div>Population</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-language"></i>
+                                <div>Language</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-arrows-alt"></i>
+                                <div>Area</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>Formation</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- State 6 -->
+                <!-- State Card 3 -->
                 <div class="state-card">
-                    <div class="state-placeholder">
-                        <div class="placeholder-content">
-                            <i class="fas fa-university"></i>
-                            <p>Historical significance</p>
+                    <div class="state-header">
+                        <div class="state-placeholder">
+                            <i class="fas fa-umbrella-beach"></i>
+                            <h3>State</h3>
+                            <div class="name-placeholder">State Name Placeholder</div>
                         </div>
                     </div>
-                    <div class="state-info">
-                        <p>Historical events, important figures, archaeological sites, and heritage locations.</p>
+                    <div class="state-content">
+                        <div class="capital-info">
+                            <h4><i class="fas fa-city"></i> Capital</h4>
+                            <div class="capital-placeholder">Capital Name Placeholder</div>
+                        </div>
+                        <div class="state-details">
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <div>Population</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-language"></i>
+                                <div>Language</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-arrows-alt"></i>
+                                <div>Area</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>Formation</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- State Card 4 -->
+                <div class="state-card">
+                    <div class="state-header">
+                        <div class="state-placeholder">
+                            <i class="fas fa-industry"></i>
+                            <h3>State</h3>
+                            <div class="name-placeholder">State Name Placeholder</div>
+                        </div>
+                    </div>
+                    <div class="state-content">
+                        <div class="capital-info">
+                            <h4><i class="fas fa-city"></i> Capital</h4>
+                            <div class="capital-placeholder">Capital Name Placeholder</div>
+                        </div>
+                        <div class="state-details">
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <div>Population</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-language"></i>
+                                <div>Language</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-arrows-alt"></i>
+                                <div>Area</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>Formation</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- State Card 5 -->
+                <div class="state-card">
+                    <div class="state-header">
+                        <div class="state-placeholder">
+                            <i class="fas fa-university"></i>
+                            <h3>State</h3>
+                            <div class="name-placeholder">State Name Placeholder</div>
+                        </div>
+                    </div>
+                    <div class="state-content">
+                        <div class="capital-info">
+                            <h4><i class="fas fa-city"></i> Capital</h4>
+                            <div class="capital-placeholder">Capital Name Placeholder</div>
+                        </div>
+                        <div class="state-details">
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <div>Population</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-language"></i>
+                                <div>Language</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-arrows-alt"></i>
+                                <div>Area</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>Formation</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- State Card 6 -->
+                <div class="state-card">
+                    <div class="state-header">
+                        <div class="state-placeholder">
+                            <i class="fas fa-seedling"></i>
+                            <h3>State</h3>
+                            <div class="name-placeholder">State Name Placeholder</div>
+                        </div>
+                    </div>
+                    <div class="state-content">
+                        <div class="capital-info">
+                            <h4><i class="fas fa-city"></i> Capital</h4>
+                            <div class="capital-placeholder">Capital Name Placeholder</div>
+                        </div>
+                        <div class="state-details">
+                            <div class="detail-item">
+                                <i class="fas fa-users"></i>
+                                <div>Population</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-language"></i>
+                                <div>Language</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-arrows-alt"></i>
+                                <div>Area</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                            <div class="detail-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                <div>Formation</div>
+                                <div class="detail-placeholder">--</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
             
-            <p style="text-align: center; margin-top: 2.5rem; color: #666; font-style: italic;">Each of India's 28 states has a unique identity, culture, and contribution to the nation. These placeholders represent spaces where detailed information about each state can be added without explicitly naming them on this page.</p>
+            <div class="placeholder-hint">
+                <p><i class="fas fa-info-circle"></i> Each card above has two main placeholders: one for the state name (colored section) and one for the capital city (blue bordered section). Additional placeholders are provided for population, language, area, and formation year. Actual state and capital names can be added to these placeholders when required.</p>
+            </div>
+        </section>
+        
+        <section id="features" class="intro">
+            <h2><i class="fas fa-star"></i> Design Features</h2>
+            <div class="state-details" style="grid-template-columns: repeat(2, 1fr); margin-top: 1.5rem; background: none; padding: 0;">
+                <div class="detail-item" style="background-color: white; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+                    <i class="fas fa-map-pin"></i>
+                    <div>State Name Area</div>
+                    <div class="detail-placeholder" style="background-color: #FF9933; color: white;">Distinct colored section</div>
+                </div>
+                <div class="detail-item" style="background-color: white; box-shadow: 0 3px 10px rgba(0,0,0,0.08);">
+                    <i class="fas fa-city"></i>
+                    <div>Capital Area</div>
+                    <div class="detail-placeholder" style="background-color: #E6F2FF; color: #000080;">Separate bordered section</div>
+                </div>
+            </div>
+            
+            <p style="margin-top: 1.5rem;">This template provides a clean, organized way to present information about Indian states without displaying actual names. The placeholders are clearly marked and follow a consistent design pattern across all state cards.</p>
         </section>
     </div>
     
@@ -421,11 +674,11 @@
             <div class="footer-logo">
                 <i class="fas fa-peace"></i>
             </div>
-            <h3>Incredible India</h3>
-            <p>A land of diverse cultures, traditions, and heritage</p>
+            <h3>India Explorer</h3>
+            <p>Template for Indian State Information</p>
             <div class="copyright">
-                <p>© 2023 India Information Portal. This website is for educational purposes.</p>
-                <p>All state placeholders are reserved for future content addition.</p>
+                <p>© 2023 India Explorer. This design includes placeholders for state names and capitals.</p>
+                <p>All placeholders are reserved for future content addition without displaying actual names.</p>
             </div>
         </div>
     </footer>
@@ -435,7 +688,27 @@
         document.querySelectorAll('.state-card').forEach(card => {
             card.addEventListener('click', function() {
                 // Visual feedback on click
-                this.style.boxShadow = '0 8px 25px rgba(0, 0, 128, 0.2)';
+                this.style.boxShadow = '0 8px 25px rgba(0, 0, 128, 0.25)';
+                
+                // Highlight state name placeholder
+                const statePlaceholder = this.querySelector('.name-placeholder');
+                const originalStateText = statePlaceholder.textContent;
+                const originalStateBg = statePlaceholder.style.backgroundColor;
+                
+                // Highlight capital placeholder
+                const capitalPlaceholder = this.querySelector('.capital-placeholder');
+                const originalCapitalText = capitalPlaceholder.textContent;
+                const originalCapitalBg = capitalPlaceholder.style.backgroundColor;
+                
+                // Show temporary state name
+                statePlaceholder.textContent = "[State Name]";
+                statePlaceholder.style.backgroundColor = "#138808";
+                statePlaceholder.style.color = "white";
+                
+                // Show temporary capital name
+                capitalPlaceholder.textContent = "[Capital City]";
+                capitalPlaceholder.style.backgroundColor = "#000080";
+                capitalPlaceholder.style.color = "white";
                 
                 // Reset other cards
                 document.querySelectorAll('.state-card').forEach(otherCard => {
@@ -444,18 +717,17 @@
                     }
                 });
                 
-                // Show a message (in a real site, this would load state-specific content)
-                const placeholder = this.querySelector('.placeholder-content p');
-                const originalText = placeholder.textContent;
-                placeholder.textContent = "State information will be loaded here...";
-                placeholder.style.color = "#138808";
-                placeholder.style.fontWeight = "bold";
-                
                 // Reset after a moment
                 setTimeout(() => {
-                    placeholder.textContent = originalText;
-                    placeholder.style.color = "";
-                    placeholder.style.fontWeight = "";
+                    statePlaceholder.textContent = originalStateText;
+                    statePlaceholder.style.backgroundColor = originalStateBg;
+                    statePlaceholder.style.color = "";
+                    
+                    capitalPlaceholder.textContent = originalCapitalText;
+                    capitalPlaceholder.style.backgroundColor = originalCapitalBg;
+                    capitalPlaceholder.style.color = "";
+                    
+                    this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.08)';
                 }, 1500);
             });
         });
